@@ -1,0 +1,252 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="canvas_head" width="800" height="50">°.°·(((p(≧□≦)q)))·°.°。 不兼容！！</canvas>
+    </div>    
+    <div class="container main_container">
+      <div id="left_side_bar" class="left"><p id="site_title"><span class="superbig">ctl</span> BLOG</p>
+        <p class="left_side_text">想做有趣又靠谱的青年<br/>目前本职数据分析<br/>择偶中(<ゝω·)☆</p></div>
+      <div><canvas id="canvas" width="500" height="200" class="left">°.°·(((p(≧□≦)q)))·°.°。 不兼容！！</canvas>
+        <div style="width:500; height:170;">
+          <% @posts.each do |post| %>
+            <p><%= link_to post.title, post%></p>
+            <p>-<%= time_ago_in_words post.created_at %> ago</p>
+          <%end%>
+          <p>  
+            <%= link_to "New Post", new_post_path%>  
+          </p> 
+        </div></div>
+    </div>
+    <div class="container">
+      <canvas id="canvas_read" width="800" height="80">°.°·(((p(≧□≦)q)))·°.°。 不兼容！！</canvas>
+    </div>    
+    <div class="container">
+      <canvas id="canvas_tail" width="800" height="50">°.°·(((p(≧□≦)q)))·°.°。 不兼容！！</canvas>
+    </div>    
+    <script type="text/javascript">
+      //initialize carrots
+      var c_h = document.getElementById("canvas_head");
+      put_carrot(c_h);
+      var c_t = document.getElementById("canvas_tail");
+      put_carrot(c_t);
+      var c_r = document.getElementById("canvas_read");
+      put_readme(c_r);
+      //initialize the rabbit
+      var c = document.getElementById("canvas");
+      var rabbit = c.getContext("2d");
+      rabbit.fillStyle = "dimgray";
+      var i = 6;
+      var d = 6 * i;
+      var x = 4 * i;
+      var y = 4 * i;
+      var s = 10 * i;
+      var r_l = 500 - 11 * i;
+      var l_l = 0;
+      var rabbit_loc = {x: x, y: y};
+      put_rabbit(rabbit_loc.x, rabbit_loc.y, i, d);
+      //put_index();
+      function put_rabbit(x)
+      {
+        //left ear;
+        rabbit.fillRect(x + 4 * i, y + 4 * i + d, 2 * i, i);
+        rabbit.fillRect(x + 5 * i, y + 5 * i + d, i, 2 * i);
+        //body;
+        rabbit.fillRect(x + 5 * i, y + 7 * i + d, 5 * i, 10 * i);
+        //right ear;
+        rabbit.fillRect(x + 9 * i, y + 4 * i + d, 2 * i, i);
+        rabbit.fillRect(x + 9 * i, y + 5 * i + d, i, 2 * i);
+        //legs;
+        rabbit.fillRect(x + 5 * i, y + 17 * i + d, i, 3 * i);
+        rabbit.fillRect(x + 9 * i, y + 17 * i + d, i, 3 * i);
+      }
+      function put_carrot(c)
+      {
+        carrot = c.getContext("2d");
+        for (var c_i = 80; c_i <= 800; c_i = c_i + 113)
+        {
+          carrot.fillStyle = "tomato";
+          carrot.fillRect(c_i, 6, 12, 24);
+          carrot.fillRect(c_i + 3, 30, 6, 6);
+          carrot.fillStyle = "yellowgreen";
+          carrot.fillRect(c_i + 3, 0, 3, 6);
+          carrot.fillRect(c_i + 9, 0, 3, 6);
+        }
+      }
+      function put_readme(c)
+      {
+        readme = c.getContext("2d");
+        // Set line styles;
+        readme.strokeStyle = "dimgray";
+        readme.lineWidth = 2;
+        var r_d = 80;
+        roundedRect(readme, 100, 5, 35, 35, 5);
+        roundedRect(readme, 135 + r_d + 15, 5, 210, 35, 5);
+        roundedRect(readme, 345 + 2 * r_d + 1, 5, 35, 35, 5);
+        roundedRect(readme, 380 + 3 * r_d + 23, 5, 70, 35, 5);
+        readme.font = "20px Calibri";
+        readme.fillStyle = "dimgray";
+        readme.fillText("←", 108, 30);
+        readme.fillText("Space", 135 + r_d + 82 + 15, 30);
+        readme.fillText("→", 345 + 2 * r_d + 8 + 1, 30);
+        readme.fillText("Enter", 380 + 3 * r_d + 13 + 23, 30);
+        readme.font = "15px Calibri";
+        readme.fillText("Move Left", 108 + 35, 30);
+        readme.fillText("Jump", 135 + r_d + 82 + 152, 30);
+        readme.fillText("Move Right", 345 + 2 * r_d + 8 + 37, 30);
+        readme.fillText("Select", 380 + 3 * r_d + 13 + 88, 30);
+
+      }
+      function put_index()
+      {
+        rabbit.font = "20px Hiragino Sans GB,Microsoft YaHei,微软雅黑,tahoma,arial,simsun,宋体";
+        r_f = 0;
+        x_f = 54;
+        y_f = y + 25 * i + d + 50;
+        s_f = 120;
+        var i_f = "日 志 图 片 实 例 其 他".split(" ");
+        for (i_i = 0; i_i < 4; i_i++)
+        {
+          rabbit.fillText(i_f[2 * i_i], x_f + i_i * s_f + 5, y_f);
+          rabbit.fillText(i_f[2 * i_i + 1], x_f + i_i * s_f + r_f + 5, y_f + 50);
+        }
+      }
+      function jump()
+      {
+        setTimeout("bounce()", 100);
+        setTimeout("fall()", 250);
+      }
+      function bounce()
+      {
+        rabbit.clearRect(rabbit_loc.x, y + d, 11 * i, 20 * i);
+        //left ear;
+        rabbit.fillRect(rabbit_loc.x + 5 * i, y + 4 * i, i, i);
+        rabbit.fillRect(rabbit_loc.x + 5 * i, y + 5 * i, i, 2 * i);
+        //body;
+        rabbit.fillRect(rabbit_loc.x + 5 * i, y + 7 * i, 5 * i, 10 * i);
+        //right ear;
+        rabbit.fillRect(rabbit_loc.x + 9 * i, y + 4 * i, i, i);
+        rabbit.fillRect(rabbit_loc.x + 9 * i, y + 5 * i, i, 2 * i);
+        //legs;
+        rabbit.fillRect(rabbit_loc.x + 5 * i, y + 17 * i, i, 3 * i);
+        rabbit.fillRect(rabbit_loc.x + 9 * i, y + 17 * i, i, 3 * i);
+      }
+      function fall()
+      {
+        rabbit.clearRect(rabbit_loc.x, y, 11 * i, 20 * i);
+        put_rabbit(rabbit_loc.x);
+      }
+      var move_lock = false;
+      function right()
+      {
+        if (move_lock == true)
+        {
+          return;
+        }
+        move_lock = true;
+
+        rabbit.clearRect(rabbit_loc.x, y + d, 11 * i, 20 * i);
+
+        if (rabbit_loc.x < r_l - s)
+        {
+          rabbit_loc.x += s;
+          //setTimeout("put_rabbit("+rabbit_loc.x+")", 100);
+          //put_rabbit(rabbit_loc.x);
+          setTimeout("bounce()", 100);
+          setTimeout("fall()", 250);
+        }
+        else
+        {
+          jump();
+        }
+        setTimeout("move_lock=false", 270);
+      }
+      function left()
+      {
+        if (move_lock == true)
+        {
+          return;
+        }
+        move_lock = true;
+
+        rabbit.clearRect(rabbit_loc.x, y + d, 11 * i, 20 * i);
+
+        if (rabbit_loc.x > l_l + s)
+        {
+          rabbit_loc.x -= s;
+          //setTimeout("put_rabbit("+rabbit_loc.x+")", 100);
+          setTimeout("bounce()", 100);
+          setTimeout("fall()", 250);
+        }
+        else
+        {
+          jump();
+        }
+        setTimeout("move_lock=false", 270);
+      }
+      function enter()
+      {
+        switch (rabbit_loc.x + 5 * i)
+        {
+          case 54:
+            window.location.href = "blank.html";
+            break;
+          case 174:
+            window.location.href = "blank.html";
+            break;
+          case 294:
+            window.location.href = "blank.html";
+            break;
+          case 414:
+            window.location.href = "blank.html";
+            break;
+          default:
+            jump();
+        }
+      }
+      function doKeyDown(evt)
+      {
+        if (evt.keyCode == 32)
+        {
+          jump();
+        }
+        if (evt.keyCode == 39)
+        {
+          right();
+        }
+        if (evt.keyCode == 37)
+        {
+          left();
+        }
+        if (evt.keyCode == 13)
+        {
+          enter();
+        }
+      }
+      window.addEventListener('keydown', doKeyDown, true);
+      // A utility function to draw a rectangle with rounded corners.
+
+      function roundedRect(ctx, x, y, width, height, radius) {
+        ctx.beginPath();
+        ctx.moveTo(x, y + radius);
+        ctx.lineTo(x, y + height - radius);
+        ctx.quadraticCurveTo(x, y + height, x + radius, y + height);
+        ctx.lineTo(x + width - radius, y + height);
+        ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+        ctx.lineTo(x + width, y + radius);
+        ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
+        ctx.lineTo(x + radius, y);
+        ctx.quadraticCurveTo(x, y, x, y + radius);
+        ctx.stroke();
+      }
+    </script>
+  </body>
+</html>
